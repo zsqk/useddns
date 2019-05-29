@@ -1,0 +1,25 @@
+{
+  "name": "useddns",
+  "version": "0.0.1",
+  "description": "",
+  "engines": {
+    "node": ">=8"
+  },
+  "bin": {
+    "useddns": "bin/useddns"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zsqk/useddns.git"
+  },
+  "author": "zsqk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zsqk/useddns/issues"
+  },
+  "homepage": "https://github.com/zsqk/useddns#readme"
+}

@@ -6,7 +6,7 @@ const domain = process.env.USEDDNS_DOMAIN;
 const token = process.env.USEDDNS_HE_TOKEN;
 
 if (!domain || !token) {
-  throw new Error('请先配置环境变量.');
+  throw new Error('Please configure environment variables first.');
 }
 
 const delayTime = Number(process.env.USEDDNS_DELAY_TIME) || 60000;
@@ -36,7 +36,7 @@ async function checkIP() {
     const currentIP = await getCurrentIP();
     const DNSIP = await getDNSIP();
     if (!currentIP || !DNSIP) {
-      throw new Error("没有获取到 IP" + JSON.stringify({ currentIP, DNSIP }));
+      throw new Error("Did not get IP: " + JSON.stringify({ currentIP, DNSIP }));
     }
     if (currentIP !== DNSIP) {
       console.log(JSON.stringify({ currentIP, DNSIP }));
@@ -45,7 +45,7 @@ async function checkIP() {
       );
     }
   } catch (error) {
-    console.error(`出错了: ${new Date()}`, error);
+    console.error(`Something error: ${new Date()}`, error);
   }
 }
 
@@ -59,5 +59,9 @@ function delay(time) {
   });
 }
 
-console.log(`checkip start: ${new Date()}`);
-loop();
+function start() {
+  console.log(`checkip start: ${new Date()}`);
+  return loop();
+}
+
+module.exports = { checkIP, start };
