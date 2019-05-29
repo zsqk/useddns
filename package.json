@@ -1,10 +1,11 @@
 {
-  "name": "useddns",
+  "name": "@zsqk/useddns",
   "version": "0.0.1",
   "description": "",
   "engines": {
     "node": ">=8"
   },
+  "main": "useddns.js",
   "bin": {
     "useddns": "bin/useddns"
   },
