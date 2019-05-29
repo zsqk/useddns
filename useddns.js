@@ -2,9 +2,14 @@
 
 const child_process = require("child_process");
 
-const domain = '';
-const token = '';
-const delayTime = 60000;
+const domain = process.env.USEDDNS_DOMAIN;
+const token = process.env.USEDDNS_HE_TOKEN;
+
+if (!domain || !token) {
+  throw new Error('请先配置环境变量.');
+}
+
+const delayTime = Number(process.env.USEDDNS_DELAY_TIME) || 60000;
 
 function getIP(params) {
   return new Promise((resolve, reject) => {
