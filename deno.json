@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "strict": true
+  },
+  "lint": {
+    "files": {
+      "include": [
+        "src/",
+        "mod.ts"
+      ]
+    },
+    "rules": {
+      "tags": [
+        "recommended"
+      ],
+      "include": [
+        "eqeqeq",
+        "explicit-module-boundary-types",
+        "no-throw-literal"
+      ],
+      "exclude": [
+        "ban-unused-ignore"
+      ]
+    }
+  },
+  "fmt": {
+    "files": {
+      "include": [
+        "src/",
+        "mod.ts"
+      ]
+    },
+    "options": {
+      "useTabs": false,
+      "lineWidth": 80,
+      "indentWidth": 2,
+      "singleQuote": true
+    }
+  }
+}
