@@ -3,13 +3,15 @@ import { getCurrentIP, getDNSIP } from './useddns.ts';
 
 Deno.test('getCurrentIP', async () => {
   const res = await getCurrentIP();
+  console.log(res);
   assert(res.length > 0);
 });
 
 Deno.test('getDNSIP', async () => {
-  const res = await getDNSIP({
-    dns: '1.1.1.1',
-    domain: 'www.google.com',
-  });
+  const res = await getDNSIP(
+    'www.google.com',
+    { dns: '1.1.1.1' },
+  );
+  console.log(res);
   assert(res.length > 0);
 });

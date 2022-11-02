@@ -10,18 +10,19 @@ export function getCurrentIP(): Promise<string> {
 }
 
 export function getDNSIP(
-  { dns = '1.1.1.1', domain = Deno.env.get('USEDDNS_DOMAIN') }: {
-    dns?: string;
-    domain?: string;
-  } = {},
+  domain: string,
+  { dns = '1.1.1.1' }: { dns?: string } = {},
 ): Promise<string> {
   return getIP(`@${dns} A ${domain}`);
 }
 
-export async function checkIP(token: string, domain: string): Promise<void> {
+export async function checkIP(
+  token: string,
+  domain: string,
+): Promise<[err: Error] | [err: null, res: string]> {
   try {
     const currentIP = await getCurrentIP();
-    const DNSIP = await getDNSIP();
+    const DNSIP = await getDNSIP(domain);
     if (!currentIP || !DNSIP) {
       throw new Error(
         'Did not get IP: ' + JSON.stringify({ currentIP, DNSIP }),
@@ -38,8 +39,13 @@ export async function checkIP(token: string, domain: string): Promise<void> {
         { method: 'GET' },
       );
       console.log('res', res.status, res.headers, await res.text());
+      return [null, await res.text()];
     }
-  } catch (error) {
-    console.error(`Something error: ${new Date()}`, error);
+    return [null, 'eq'];
+  } catch (err) {
+    if (err instanceof Error) {
+      return [err];
+    }
+    return [new Error(`unknown ${err}`)];
   }
 }
