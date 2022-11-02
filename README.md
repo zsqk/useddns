@@ -1,10 +1,12 @@
 # useddns
 
-A Node.js program use dns.he.net as DDNS service.
+A deno program use dns.he.net as DDNS service.
 
 - require host has a valid dns server.
 
 ## Configuration
+
+`deno run -A https://deno.land/x/useddns@v0.0.1/src/cli.ts -t xxx -d test.domain`
 
 ```sh
 OPTIONS:
