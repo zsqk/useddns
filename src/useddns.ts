@@ -1,7 +1,11 @@
 import { run } from 'https://deno.land/x/somefn@v0.20.0/deno/run.ts';
 
 export async function getIP(params: string): Promise<string> {
-  const { res } = await run(`dig ${params} +short -4`);
+  const { res, code, errMsg } = await run(`dig ${params} +short -4`);
+  if (code !== 0) {
+    console.warn('getIP error', res, errMsg);
+    return '';
+  }
   return res.replace(/(\r\n|\n|\r)/gm, '');
 }
 

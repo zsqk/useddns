@@ -28,3 +28,7 @@ Set env:
 - USEDDNS_DOMAIN
 - USEDDNS_HE_TOKEN
 - [OPTION] USEDDNS_DELAY_TIME
+
+## Dev
+
+`deno run -A src/cli.ts -t xxx -d test.domain --watch`
