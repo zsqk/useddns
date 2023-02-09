@@ -6,7 +6,7 @@ A deno program use dns.he.net as DDNS service.
 
 ## Configuration
 
-`deno run -A https://deno.land/x/useddns@v0.0.1/src/cli.ts -t xxx -d test.domain`
+`deno run -A https://deno.land/x/useddns/src/cli.ts -t xxx -d test.domain`
 
 ```sh
 OPTIONS:
@@ -34,4 +34,4 @@ Set env:
 
 ## Dev
 
-`deno run -A src/cli.ts -t xxx -d test.domain --watch`
+`deno run -A --watch src/cli.ts -t xxx -d test.domain`
