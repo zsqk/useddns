@@ -1,8 +1,11 @@
 import { run } from 'https://deno.land/x/somefn@v0.22.0/deno/run.ts';
 
-export async function getIP(params: string): Promise<string> {
+export async function getIP(
+  params: string,
+  { timeout }: { timeout?: number } = {},
+): Promise<string> {
   const { res, code, errMsg } = await run(`dig ${params} +short -4`, {
-    timeout: 5000,
+    timeout,
   });
   if (code !== 0) {
     console.warn('getIP error', res, errMsg);
@@ -11,24 +14,27 @@ export async function getIP(params: string): Promise<string> {
   return res.replace(/(\r\n|\n|\r)/gm, '');
 }
 
-export function getCurrentIP(): Promise<string> {
-  return getIP('@ns1-1.akamaitech.net ANY whoami.akamai.net');
+export function getCurrentIP(
+  { timeout }: { timeout?: number } = {},
+): Promise<string> {
+  return getIP('@ns1-1.akamaitech.net ANY whoami.akamai.net', { timeout });
 }
 
 export function getDNSIP(
   domain: string,
-  { dns = '1.1.1.1' }: { dns?: string } = {},
+  { dns = '1.1.1.1', timeout }: { dns?: string; timeout?: number } = {},
 ): Promise<string> {
-  return getIP(`@${dns} A ${domain}`);
+  return getIP(`@${dns} A ${domain}`, { timeout });
 }
 
 export async function checkIP(
   token: string,
   domain: string,
+  { timeout }: { timeout?: number } = {},
 ): Promise<[err: Error] | [err: null, res: string]> {
   try {
-    const currentIP = await getCurrentIP();
-    const DNSIP = await getDNSIP(domain);
+    const currentIP = await getCurrentIP({ timeout });
+    const DNSIP = await getDNSIP(domain, { timeout });
     if (!currentIP || !DNSIP) {
       throw new Error(
         'Did not get IP: ' + JSON.stringify({ currentIP, DNSIP }),

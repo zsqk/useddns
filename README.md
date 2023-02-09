@@ -20,6 +20,9 @@ OPTIONS:
     --delaytime
         Set loop delay time, ms.
 
+    --timeout
+        Set each timeout, ms.
+
 -h, --help
 ```
 
