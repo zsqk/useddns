@@ -1,7 +1,9 @@
-import { run } from 'https://deno.land/x/somefn@v0.20.0/deno/run.ts';
+import { run } from 'https://deno.land/x/somefn@v0.22.0/deno/run.ts';
 
 export async function getIP(params: string): Promise<string> {
-  const { res, code, errMsg } = await run(`dig ${params} +short -4`);
+  const { res, code, errMsg } = await run(`dig ${params} +short -4`, {
+    timeout: 5000,
+  });
   if (code !== 0) {
     console.warn('getIP error', res, errMsg);
     return '';
