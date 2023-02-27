@@ -6,6 +6,7 @@ const args = parse<
     {
       d: string;
       domain: string;
+      dns: string;
       t: string;
       token: string;
       delaytime: number;
@@ -45,6 +46,7 @@ const timeout = args.timeout ?? 5000;
 const delay = Number(
   args.delaytime ?? Deno.env.get('USEDDNS_DELAY_TIME') ?? 5000,
 );
+const dnsServer = args.dns;
 
 if (!domain || !token) {
   throw new Error(
@@ -81,7 +83,7 @@ let lastFailInfo = '';
 const displayInfoLoopTime = 60000;
 
 setInterval(async () => {
-  const [err, res] = await checkIP(token, domain, { timeout });
+  const [err, res] = await checkIP(token, domain, { timeout, dnsServer });
   const d = new Date();
   if (err) {
     failTime += 1;

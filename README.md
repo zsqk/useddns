@@ -14,6 +14,9 @@ OPTIONS:
 -d, --domain
         Set domain
 
+    --dns
+        Set DNS server.
+
 -t, --token
         Set he.net auth token
 

@@ -30,11 +30,11 @@ export function getDNSIP(
 export async function checkIP(
   token: string,
   domain: string,
-  { timeout }: { timeout?: number } = {},
+  { timeout, dnsServer }: { timeout?: number; dnsServer?: string } = {},
 ): Promise<[err: Error] | [err: null, res: string]> {
   try {
     const currentIP = await getCurrentIP({ timeout });
-    const DNSIP = await getDNSIP(domain, { timeout });
+    const DNSIP = await getDNSIP(domain, { timeout, dns: dnsServer });
     if (!currentIP || !DNSIP) {
       throw new Error(
         'Did not get IP: ' + JSON.stringify({ currentIP, DNSIP }),
